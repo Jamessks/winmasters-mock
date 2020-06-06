@@ -1,0 +1,64 @@
+<html lang="en">
+<meta charset="UTF-8">
+<body>
+    <script>
+        const greekTeams = ["ΑΕΚ", "ΑΡΗΣ", "ΟΛΥΜΠΙΑΚΟΣ", "ΟΦΗ", "ΠΑΝΑΘΗΝΑΙΚΟΣ"];
+
+        //A. Write a function named "activateCodeButton" that does 2 things:
+        //1. it shows within the paragraph with id "wm-selected-value", the team that a user may select from the data list.
+        //2. if the team that a user selected, matches one of the values of to the array above ("greekTeams"), then
+        //   the button with id "wm-button" becomes clickable.
+        //B. Write a function named "filterArray" that filters out all strings, from the array above ("greekTeams"),
+        //   whose lengths are shorter than, or equal to the value 4.
+        //C. Write a function named "sortDescending" that sorts the array above ("greekTeams") from the longest string to the shortest.
+
+        //Write your functions here:
+
+        function activateCodeButton(){
+            let choice = document.getElementById("wm-list").value;
+
+            if (document.getElementById("wm-selected-value").innerHTML === "") {
+                greekTeams.forEach(fillFunction);
+
+                function fillFunction(item) {
+                    document.getElementById("wm-selected-value").innerHTML += item + "<br>";
+                }
+            } else if(document.getElementById("wm-list").value === "") {
+                document.getElementById("wm-selected-value").innerHTML = "";
+            }
+            if(greekTeams.indexOf(choice) !== -1) {
+                document.getElementById("wm-button").disabled = false;
+            } else {
+                document.getElementById("wm-button").disabled = true;
+            }
+        }
+
+        function filterArray(){
+            return greekTeams.filter(word => word.length > 4);
+        }
+
+        function sortDescending(){
+            return  greekTeams.sort(function(a, b){
+                return b.length - a.length;
+            });
+        }
+    </script>
+
+    <div id="wm-list-container">
+        <input id="wm-list" list="wm-greek-teams" name="wm-greek-teams" oninput="activateCodeButton()">
+        <datalist id="wm-greek-teams">
+            <option value="ΑΕΚ">
+            <option value="ΑΡΗΣ">
+            <option value="ΟΛΥΜΠΙΑΚΟΣ">
+            <option value="ΟΦΗ">
+            <option value="ΠΑΝΑΘΗΝΑΙΚΟΣ">
+        </datalist>
+    </div>
+
+    <p id="wm-selected-value"></p>
+
+    <button type="button" id="wm-button" disabled>Παρε το μπόνους!</button>
+
+</body>
+
+</html>
